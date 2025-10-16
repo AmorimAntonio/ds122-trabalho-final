@@ -1,4 +1,4 @@
-# Fluxo super simples (SEM branches)
+# Fluxo simples (sem branches)
 
 > Todo mundo vai trabalhar direto na `main` para evitar trabalho desnecessário.  
 > **Risco:** mais chance de conflito. **Como evitar?** Puxar antes de começar, commits pequenos, combinar quem edita qual arquivo.
