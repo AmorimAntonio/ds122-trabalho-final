@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Neue", cursive, sans-serif;
+    background-color: #222;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+/* cabeçalho */
+
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    background-color: #222;
+}
+
+.logo {
+    font-size: 1.6em;
+    color: #ff7b00;
+    cursor: pointer; 
+    text-decoration: underline;
+}
+
+.score {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.pause-btn {
+    font-size: 1.4em;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+}
+
+.pause-btn:hover {
+    transform: scale(1.2);
+}
+
+
+/* main */
+
+.game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Container do texto principal */
+.text-container {
+    width: 70%;
+    text-align: center;
+    font-size: 1.8em;
+    line-height: 1.6em;
+    font-weight: bold;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    padding: 30px 10px;
+    margin-bottom: 40px;
+}
+
+.display-text {
+    margin: 0;
+}
+
+
+/* digitação */
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.input-field {
+    background: none;
+    border: 1px solid #ff7b00;
+    border-radius: 20px;
+    padding: 10px 30px;
+    color: white;
+    font-size: 1em;
+    outline: none;
+    width: 250px;
+    text-align: center;
+    cursor: text;
+    transition: 0.3s;
+}
+
+.input-field:focus {
+    border-color: #ffa94d;
+}
+
+/* -------------------------------------------------- */
+/* FEEDBACK (acertos, erros, etc.)                     */
+/* -------------------------------------------------- */
+.feedback {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #ff7b00;
+    min-height: 20px;
+    text-align: center;
+}
+
+/* -------------------------------------------------- */
+/* RODAPÉ                                              */
+/* -------------------------------------------------- */
+.footer {
+    padding: 10px;
+    font-size: 0.8em;
+    color: #aaa;
+}
