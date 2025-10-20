@@ -13,7 +13,7 @@ const feedback = document.getElementById('feedback');
 
 let score = 0;
 
-let words = ["banana", "maçarico", "feijoada", "sopranos", "dougzinho"];
+let words = ["banana", "maçarico", "labubu", "bicicleta", "alexkutzke"];
 
 randWord();
 
