@@ -2,54 +2,67 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Mitr", sans-serif;
-    background-color: #e284a2;
-    color: #fff;
+    background: radial-gradient(circle at top, #1b133d 0%, #0d0b1a 100%);
+    color: #e0e0ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 /* cabeçalho */
-
 .top-bar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px;
-    box-sizing: border-box;
-    background-color: #984e4e;
+    padding: 15px 40px;
+    background: rgba(30, 25, 60, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(80, 70, 160, 0.4);
 }
 
 .logo {
-    font-size: 1.6em;
-    color: lightcoral;
-    cursor: pointer; 
-    text-decoration: underline;
+    font-size: 1.8em;
+    color: #8a7cff;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(138, 124, 255, 0.8);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.logo:hover {
+    color: #a9a2ff;
+    text-shadow: 0 0 12px rgba(160, 150, 255, 1);
 }
 
 .score {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 6px 16px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(100, 90, 255, 0.2);
 }
 
 .pause-btn {
-    font-size: 1.4em;
+    font-size: 1.6em;
     background: none;
     border: none;
-    color: #fff;
-    cursor: pointer; 
-    transition: transform 0.2s ease;
+    color: #b3b8ff;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease;
 }
 
 .pause-btn:hover {
     transform: scale(1.2);
+    color: #7ac6ff;
 }
 
-
 /* main */
-
 .game-area {
     flex: 1;
     display: flex;
@@ -59,26 +72,28 @@ body {
     width: 100%;
 }
 
-/* Container do texto principal */
+/* texto principal */
 .text-container {
     width: 70%;
     text-align: center;
-    font-size: 1.8em;
+    font-size: 1.9em;
     line-height: 1.6em;
     font-weight: bold;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #fff;
-    padding: 30px 10px;
+    color: #c8c9ff;
+    border-left: 3px solid rgba(120, 130, 255, 0.4);
+    border-right: 3px solid rgba(120, 130, 255, 0.4);
+    padding: 30px 15px;
     margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(150, 150, 255, 0.5);
+    transition: all 0.3s ease;
 }
 
 .display-text {
     margin: 0;
+    animation: fadeIn 0.8s ease;
 }
 
-
 /* digitação */
-
 .input-container {
     display: flex;
     justify-content: center;
@@ -86,38 +101,69 @@ body {
 }
 
 .input-field {
-    background: none;
-    border: 1px solid #ff7b00;
-    border-radius: 20px;
-    padding: 10px 30px;
-    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid transparent;
+    border-radius: 30px;
+    padding: 12px 30px;
+    color: #e6e6ff;
     font-size: 1em;
     outline: none;
-    width: 250px;
+    width: 260px;
     text-align: center;
-    cursor: text;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    box-shadow: 0 0 15px rgba(120, 120, 255, 0.2);
 }
 
 .input-field:focus {
-    border-color: #ffa94d;
+    border-color: #7a8bff;
+    box-shadow: 0 0 20px rgba(122, 139, 255, 0.5);
+    background: rgba(255, 255, 255, 0.12);
 }
-
 
 /* feedback */
 .feedback {
-    margin-top: 20px;
-    font-size: 1em;
-    color: #ff7b00;
-    min-height: 20px;
+    margin-top: 25px;
+    font-size: 1.1em;
+    color: #80aaff;
+    min-height: 24px;
     text-align: center;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(120, 180, 255, 0.4);
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
+.feedback.correct {
+    color: #5efc82;
+    text-shadow: 0 0 15px rgba(95, 255, 160, 0.6);
+    transform: scale(1.1);
+}
+
+.feedback.wrong {
+    color: #ff5c93;
+    text-shadow: 0 0 15px rgba(255, 92, 147, 0.6);
+    transform: scale(1.1);
+}
 
 /* rodapé */
-
 .footer {
-    padding: 10px;
-    font-size: 0.8em;
-    color: #aaa;
+    padding: 12px;
+    font-size: 0.85em;
+    color: rgba(200, 200, 255, 0.5);
+    background: rgba(20, 15, 40, 0.8);
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(100, 80, 200, 0.3);
+}
+
+/* animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
