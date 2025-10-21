@@ -24,7 +24,6 @@ body {
 
 .logo {
     font-family: Didot, serif;
-    font-weight: bold;
     font-size: 1.8em;
     color: #8a7cff;
     cursor: pointer;
@@ -161,13 +160,14 @@ body {
     color: #aaa;
 }
 
+/* --- ✨ animação de desaparecimento da cor das palavras --- */
 
-/* Quando a palavra for marcada como correta */
+/* Quando a palavra for marcada como correta (verde) */
 .line span[style*="117, 150, 0"] {
   animation: correctFade 2s ease forwards;
 }
 
-/* Quando a palavra for marcada como errada */
+/* Quando a palavra for marcada como errada (vermelho) */
 .line span[style*="191, 38, 0"] {
   animation: wrongFade 2s ease forwards;
 }
