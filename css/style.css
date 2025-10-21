@@ -43,7 +43,6 @@ body {
     font-size: 1.2em;
     font-weight: bold;
     color: #d2d2ff;
-    text-align: center
 }
 
 .pause-btn {
@@ -75,7 +74,7 @@ body {
     width: 70%;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1.7em;
+    font-size: 1.6em;
     line-height: 1.6em;
     font-weight: bold;
     border-left: 2px solid #3e3472;
