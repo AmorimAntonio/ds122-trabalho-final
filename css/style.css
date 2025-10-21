@@ -2,13 +2,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Mitr", sans-serif;
-    background: radial-gradient(circle at top, #1b133d 0%, #0d0b1a 100%);
-    color: #e0e0ff;
+    background: linear-gradient(180deg, #0d0b1e, #1b1035);
+    color: #e6e6ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
 }
 
 /* cabeçalho */
@@ -17,52 +16,40 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
-    background: rgba(30, 25, 60, 0.7);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(80, 70, 160, 0.4);
+    padding: 10px 30px;
+    box-sizing: border-box;
+    background-color: #14102b;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .logo {
-    font-size: 1.8em;
-    color: #8a7cff;
+    font-size: 1.6em;
+    color: #b38cff;
     cursor: pointer;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px rgba(138, 124, 255, 0.8);
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.logo:hover {
-    color: #a9a2ff;
-    text-shadow: 0 0 12px rgba(160, 150, 255, 1);
+    text-decoration: underline;
 }
 
 .score {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 6px 16px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(100, 90, 255, 0.2);
+    color: #d2d2ff;
 }
 
 .pause-btn {
-    font-size: 1.6em;
+    font-size: 1.4em;
     background: none;
     border: none;
-    color: #b3b8ff;
+    color: #fff;
     cursor: pointer;
-    transition: transform 0.2s ease, color 0.3s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .pause-btn:hover {
     transform: scale(1.2);
-    color: #7ac6ff;
+    color: #b38cff;
 }
 
-/* main */
+/* área principal */
 .game-area {
     flex: 1;
     display: flex;
@@ -76,24 +63,20 @@ body {
 .text-container {
     width: 70%;
     text-align: center;
-    font-size: 1.9em;
+    font-size: 1.8em;
     line-height: 1.6em;
     font-weight: bold;
-    color: #c8c9ff;
-    border-left: 3px solid rgba(120, 130, 255, 0.4);
-    border-right: 3px solid rgba(120, 130, 255, 0.4);
-    padding: 30px 15px;
+    border-left: 2px solid #3e3472;
+    border-right: 2px solid #3e3472;
+    padding: 30px 10px;
     margin-bottom: 40px;
-    text-shadow: 0 0 10px rgba(150, 150, 255, 0.5);
-    transition: all 0.3s ease;
 }
 
 .display-text {
     margin: 0;
-    animation: fadeIn 0.8s ease;
 }
 
-/* digitação */
+/* campo de digitação */
 .input-container {
     display: flex;
     justify-content: center;
@@ -101,69 +84,65 @@ body {
 }
 
 .input-field {
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid transparent;
-    border-radius: 30px;
-    padding: 12px 30px;
-    color: #e6e6ff;
+    background: none;
+    border: 2px solid #5c4d9c;
+    border-radius: 20px;
+    padding: 10px 30px;
+    color: #fff;
     font-size: 1em;
     outline: none;
-    width: 260px;
+    width: 250px;
     text-align: center;
-    transition: 0.3s ease;
-    box-shadow: 0 0 15px rgba(120, 120, 255, 0.2);
+    cursor: text;
+    transition: 0.3s;
 }
 
 .input-field:focus {
-    border-color: #7a8bff;
-    box-shadow: 0 0 20px rgba(122, 139, 255, 0.5);
-    background: rgba(255, 255, 255, 0.12);
+    border-color: #a57cff;
+    box-shadow: 0 0 10px #a57cff;
 }
 
 /* feedback */
 .feedback {
-    margin-top: 25px;
-    font-size: 1.1em;
-    color: #80aaff;
-    min-height: 24px;
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    min-height: 30px;
     text-align: center;
-    font-weight: 600;
-    text-shadow: 0 0 10px rgba(120, 180, 255, 0.4);
-    transition: color 0.3s ease, transform 0.2s ease;
+    color: #ffb347; /* cor padrão visível */
+    text-shadow: 0 0 10px rgba(255, 179, 71, 0.6);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
 }
 
-.feedback.correct {
-    color: #5efc82;
-    text-shadow: 0 0 15px rgba(95, 255, 160, 0.6);
-    transform: scale(1.1);
+.feedback:not(:empty) {
+    animation: feedbackFade 1s ease-in-out;
 }
 
-.feedback.wrong {
-    color: #ff5c93;
-    text-shadow: 0 0 15px rgba(255, 92, 147, 0.6);
-    transform: scale(1.1);
+/* animação do feedback */
+@keyframes feedbackFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 /* rodapé */
 .footer {
-    padding: 12px;
-    font-size: 0.85em;
-    color: rgba(200, 200, 255, 0.5);
-    background: rgba(20, 15, 40, 0.8);
-    width: 100%;
-    text-align: center;
-    backdrop-filter: blur(6px);
-    border-top: 1px solid rgba(100, 80, 200, 0.3);
-}
-
-/* animações */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    padding: 10px;
+    font-size: 0.8em;
+    color: #aaa;
 }
