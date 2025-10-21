@@ -23,6 +23,7 @@ body {
 }
 
 .logo {
+    font-family: fantasy;
     font-size: 1.8em;
     color: #8a7cff;
     cursor: pointer;
