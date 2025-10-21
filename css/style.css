@@ -23,11 +23,20 @@ body {
 }
 
 .logo {
-    font-size: 1.6em;
-    color: #b38cff;
+    font-size: 1.8em;
+    color: #8a7cff;
     cursor: pointer;
-    text-decoration: underline;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(138, 124, 255, 0.8);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
+.logo:hover {
+    color: #a9a2ff;
+    text-shadow: 0 0 12px rgba(160, 150, 255, 1);
+}
+
 
 .score {
     font-size: 1.2em;
