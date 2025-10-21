@@ -23,8 +23,8 @@ body {
 }
 
 .logo {
-    font-family: Didot, serif;
-    font-weight: bold;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
     font-size: 1.8em;
     color: #8a7cff;
     cursor: pointer;
