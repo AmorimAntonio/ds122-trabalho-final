@@ -24,7 +24,7 @@ body {
 
 .logo {
     font-size: 1.6em;
-    color: #ff7b00;
+    color: lightcoral;
     cursor: pointer; 
     text-decoration: underline;
 }
