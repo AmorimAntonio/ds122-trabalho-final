@@ -75,7 +75,7 @@ body {
     width: 70%;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 1.8em;
+    font-size: 1.7em;
     line-height: 1.6em;
     font-weight: bold;
     border-left: 2px solid #3e3472;
@@ -93,6 +93,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100%;
+
 }
 
 .input-field {
@@ -101,7 +102,7 @@ body {
     border-radius: 20px;
     padding: 10px 30px;
     color: #fff;
-    font-size: 1em;
+    font-size: 1.6em;
     outline: none;
     width: 250px;
     text-align: center;
