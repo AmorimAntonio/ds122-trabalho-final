@@ -26,7 +26,7 @@ body {
     font-size: 1.6em;
     color: #b38cff;
     cursor: pointer;
-    text-decoration: nonego underline;
+    text-decoration: underline;
 }
 
 .score {
@@ -145,4 +145,45 @@ body {
     padding: 10px;
     font-size: 0.8em;
     color: #aaa;
+}
+
+/* --- ✨ animação de desaparecimento da cor das palavras --- */
+
+/* Quando a palavra for marcada como correta (verde) */
+.line span[style*="117, 150, 0"] {
+  animation: correctFade 2s ease forwards;
+}
+
+/* Quando a palavra for marcada como errada (vermelho) */
+.line span[style*="191, 38, 0"] {
+  animation: wrongFade 2s ease forwards;
+}
+
+/* Efeitos de fade */
+@keyframes correctFade {
+  0% {
+    color: rgba(117, 150, 0, 1);
+    text-shadow: 0 0 10px rgba(117, 150, 255, 0.6);
+  }
+  70% {
+    color: rgba(117, 150, 255, 0.6);
+  }
+  100% {
+    color: rgba(230, 230, 255, 0.5); /* volta ao branco suave */
+    text-shadow: none;
+  }
+}
+
+@keyframes wrongFade {
+  0% {
+    color: rgba(191, 38, 0, 1);
+    text-shadow: 0 0 10px rgba(255, 60, 60, 0.6);
+  }
+  70% {
+    color: rgba(191, 38, 255, 0.6);
+  }
+  100% {
+    color: rgba(230, 230, 255, 0.5);
+    text-shadow: none;
+  }
 }
