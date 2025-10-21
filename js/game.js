@@ -17,23 +17,32 @@ const feedback = document.getElementById('feedback');
 const scoreValue = document.getElementById('scoreValue');
 
 // embaralhar palavras
-let wList = [...words].sort(() => Math.random() - 0.5); //[...palavra] cria cópia
+let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
 let indexWord = 0;  // controla qual palavra o jogador deve digitar
 let score = 0;
 
 // função que gera 4 palavras aleatórias
 function genBlock(n) {
     if (wList.length < n) {
-        wList = [...words].sort(() => Math.random() - 0.5);
+        wList = [...words].sort(() => Math.random() - 0.5); // reembaralha se acabar as palavras
     }
-    const blockWords = wList.splice(0, n);
-    // renderiza cada palavra dentro de um <span> para poder estilizar individualmente
-    displayText.innerHTML = blockWords.map(w => `<span>${w}</span>`).join(' ');
-    return blockWords;
+    //splice modifica o array original, removendo os primeiros n elementos e retorna os novos
+    return wList.splice(0, n);
 }
 
-let currentBlock = genBlock(50); // gerando bloco com as palavras iniciais
+// renderiza todas as linhas (cada linha é um bloco)
+function renderLines(lines) {
+    displayText.innerHTML = 
+    lines.map(block => `<div class="line">${block.map(w => `<span>${w}</span>`).join(' ')}</div>`).join('');
+    // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
+}
 
+// inicializa 4 linhas
+let lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
+let currentBlock = lines[0];
+renderLines(lines);
+
+// detecta quando o jogador aperta uma tecla (no caso, olhamos para o espaço)
 playerInput.addEventListener('keyup', function(event) {
 
     //Se o player apertar espaço
@@ -42,14 +51,15 @@ playerInput.addEventListener('keyup', function(event) {
         const input = playerInput.value.trim();
         // palavra que o usuario deve digitar
         const expecWord = currentBlock[indexWord].trim();
-        // seleciona o span da palavra atual
-        const spans = displayText.querySelectorAll('span');
+        // pega os spans da primeira linha
+        const firstline = displayText.querySelector('.line');
+        const spans = firstline.querySelectorAll('span');
         // span alvo
         const targetSpan = spans[indexWord];
 
 
         if (targetSpan) {
-            if (input.toLowerCase() === expecWord.toLowerCase()) {
+            if (input === expecWord) {
                 targetSpan.style.color = "rgba(117, 150, 0, 1)";
                 feedback.textContent = "✅";
                 score+=10;
@@ -65,9 +75,13 @@ playerInput.addEventListener('keyup', function(event) {
         // limpa o input
         playerInput.value = '';
 
+        
         if (indexWord >= currentBlock.length) {
-            currentBlock = genBlock(50);
+            lines.shift(); // remove a linha atual
+            lines.push(genBlock(10)); // adiciona uma nova linha
+            currentBlock = lines[0]; // aponta qual é a linha atual
             indexWord = 0;
+            renderLines(lines); // atualizando o dom
         }
   }
 });
