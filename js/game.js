@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-// words.js
-const palavras = [
+const words = [
   "javascript","html","css","programar","teclado","computador","web","codigo","função","variavel",
   "constante","objeto","array","condicional","loop","estrutura","classe","interface","elemento","browser",
   "framework","react","vue","angular","backend","frontend","servidor","cliente","dados","api",
@@ -13,111 +11,63 @@ const palavras = [
   "reiniciar","tela","design","interface","ux","ui","script","logica","algoritmo","funcoes","metodo"
 ];
 
-
-
 const displayText = document.getElementById('displayText');
 const playerInput = document.getElementById('playerInput');
 const feedback = document.getElementById('feedback');
 const scoreValue = document.getElementById('scoreValue');
 
 // embaralhar palavras
-let lista = [...palavras].sort(() => Math.random() - 0.5); //[...palavra] cria cópia
-let indicePalavra = 0;  // controla qual palavra o jogador deve digitar
+let wList = [...words].sort(() => Math.random() - 0.5); //[...palavra] cria cópia
+let indexWord = 0;  // controla qual palavra o jogador deve digitar
 let score = 0;
 
 // função que gera 4 palavras aleatórias
-function gerarBloco() {
-  if (lista.length < 4) {
-    // reembaralha se acabar
-    lista = [...palavras].sort(() => Math.random() - 0.5);
-  }
-  const bloco = lista.splice(0, 4);
-  displayText.textContent = bloco.join(' ');
-  return bloco;
+function genBlock(n) {
+    if (wList.length < n) {
+        wList = [...words].sort(() => Math.random() - 0.5);
+    }
+    const blockWords = wList.splice(0, n);
+    // renderiza cada palavra dentro de um <span> para poder estilizar individualmente
+    displayText.innerHTML = blockWords.map(w => `<span>${w}</span>`).join(' ');
+    return blockWords;
 }
 
-// primeiro bloco
-let blocoAtual = gerarBloco();
+let currentBlock = genBlock(50); // gerando bloco com as palavras iniciais
 
-// evento de digitação
-playerInput.addEventListener('keyup', (e) => {
-  if (e.code === 'Space') {
-    const entrada = playerInput.value.trim();
-    const palavraEsperada = blocoAtual[indicePalavra].trim();
+playerInput.addEventListener('keyup', function(event) {
 
-    if (entrada === palavraEsperada) {
-      feedback.textContent = "✅";
-      score++;
-      scoreValue.textContent = score;
-    } else {
-      feedback.textContent = "❌";
-    }
-
-    indicePalavra++;
-    playerInput.value = ''; // limpa o campo
-
-    // se terminou as 4 palavras, gera novas
-    if (indicePalavra >= blocoAtual.length) {
-      blocoAtual = gerarBloco();
-      indicePalavra = 0;
-    }
-  }
-});
-=======
-// Cabeçalho
-const scoreBoard = document.getElementById('scoreBoard');
-const scoreValue = document.getElementById('scoreValue');
-const btnPause = document.getElementById('btnPause');
-
-// Área principal do jogo
-const gameArea = document.getElementById('gameArea');
-const textContainer = document.getElementById('textContainer');
-const displayText = document.getElementById('displayText');
-const inputForm = document.getElementById('inputForm');
-const playerInput = document.getElementById('playerInput');
-const feedback = document.getElementById('feedback');
-
-let score = 0;
-
-let words = ["banana", "maçarico", "labubu", "bicicleta", "alexkutzke"];
-
-randWord();
-
-// Evento principal
-inputForm.addEventListener("keyup", function(event) {
-  
-
-    // verifica se apertou espaço
+    //Se o player apertar espaço
     if (event.code === 'Space') {
+        // input do usuario
+        const input = playerInput.value.trim();
+        // palavra que o usuario deve digitar
+        const expecWord = currentBlock[indexWord].trim();
+        // seleciona o span da palavra atual
+        const spans = displayText.querySelectorAll('span');
+        // span alvo
+        const targetSpan = spans[indexWord];
 
-        event.preventDefault(); // evita o espaço ser digitado no input
 
-        // Captura os valores no momento da tecla
-        const playerText = playerInput.value.trim();
-        const targetText = displayText.textContent.trim();
-
-
-        // Verifica se o texto está correto
-
-        if (playerText === targetText) {
-            score += 10;
-            scoreValue.textContent = score;
-            feedback.textContent = "✅";
-        } else {
-            feedback.textContent = "❌";
+        if (targetSpan) {
+            if (input.toLowerCase() === expecWord.toLowerCase()) {
+                targetSpan.style.color = "rgba(117, 150, 0, 1)";
+                feedback.textContent = "✅";
+                score+=10;
+                scoreValue.textContent = score;
+            } else {
+                targetSpan.style.color = "rgba(191, 38, 0, 1)";
+                feedback.textContent = "❌";
+            }
         }
 
-    // Limpa o campo de entrada
-    playerInput.value = "";
-    randWord();
+        // avança para a próxima palavra
+        indexWord++;
+        // limpa o input
+        playerInput.value = '';
 
-
+        if (indexWord >= currentBlock.length) {
+            currentBlock = genBlock(50);
+            indexWord = 0;
+        }
   }
-
 });
-
-function randWord(){
-    random = Math.floor(Math.random()*5);
-    displayText.textContent = words[random];
-}
->>>>>>> 0d09bfee08fe825e8e8d8ad5ee60e4a59a7199c9
