@@ -17,6 +17,7 @@ const feedback = document.getElementById('feedback'); // feedback de acerto/erro
 const scoreValue = document.getElementById('scoreValue'); // pontuação
 const timerDisp = document.getElementById('timer'); // display do timer
 const btnPause = document.getElementById('btnPause'); // botão de pausar
+const btnRestart = document.getElementById('btnRestart'); // botão de reiniciar
 
 // ------------------ Funções --------------------- //
 
@@ -58,6 +59,28 @@ btnPause.addEventListener("click", function(){
         playerInput.disabled = true;
     }
 }) 
+
+btnRestart.addEventListener("click", function(){
+    // reinicia o jogo
+    resetTimer(60); // reseta o timer para 60 segundos
+    score = 0;
+    btnClick = 0;
+    scoreValue.textContent = score;
+    indexWord = 0;
+    playerInput.value = '';
+    playerInput.disabled = false;
+    wList = [...words].sort(() => Math.random() - 0.5);
+    lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
+    currentBlock = lines[0];
+    renderLines(lines);
+
+    // reinicia timer
+    startTimer();
+
+    // limpa feedback visual
+    feedback.textContent = '';
+}
+)
 
 // função para resetar o timer
 function resetTimer(seconds = timeLeft) {
