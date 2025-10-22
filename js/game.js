@@ -11,10 +11,11 @@ const words = [
   "reiniciar","tela","design","interface","ux","ui","script","logica","algoritmo","funcoes","metodo"
 ];
 
-const displayText = document.getElementById('displayText');
-const playerInput = document.getElementById('playerInput');
-const feedback = document.getElementById('feedback');
-const scoreValue = document.getElementById('scoreValue');
+const displayText = document.getElementById('displayText'); // área onde as palavras são mostradas
+const playerInput = document.getElementById('playerInput'); // input do jogador
+const feedback = document.getElementById('feedback'); // feedback de acerto/erro
+const scoreValue = document.getElementById('scoreValue'); // pontuação
+const timer = document.getElementById('timer'); // timer 
 
 // embaralhar palavras
 let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
