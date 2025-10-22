@@ -35,6 +35,25 @@
         
     </header>
 
+    <!-- Pause menu -->
+    <div id="pauseMenu" class="pause-menu" role="dialog" aria-modal="true" aria-labelledby="pauseTitle" hidden>
+    <div class="pause-backdrop" aria-hidden="true"></div>
+
+    <div class="pause-box" role="document">
+        <h2 id="pauseTitle">Jogo Pausado</h2>
+        <p class="pause-subtitle">O jogo está em pausa.</p>
+
+        <div class="pause-actions">
+        <button id="btnResume" type="button">Retomar</button>
+        <button id="btnRestartFromPause" type="button">Reiniciar</button>
+        </div>
+
+        <div class="pause-extra">
+        <small class="pause-note">Dica: pressione Esc para fechar.</small>
+        </div>
+    </div>
+    </div>
+
 
     <!-- main -->
     <main id="gameArea" class="game-area">
