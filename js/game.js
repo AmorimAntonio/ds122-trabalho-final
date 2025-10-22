@@ -50,10 +50,12 @@ btnPause.addEventListener("click", function(){
     if (btnClick){
         startTimer();
         btnClick = 0;
+        playerInput.disabled = false;
     }
     else{
         stopTimer();
         btnClick = 1;
+        playerInput.disabled = true;
     }
 }) 
 

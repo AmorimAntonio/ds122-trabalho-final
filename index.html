@@ -60,6 +60,20 @@
         <!-- mensagens de feedback (acerto, erro, tempo, etc.) -->
         <div id="feedback" class="feedback" name="feedback"></div>
 
+
+        <!-- popup de fim de jogo -->
+        <div id="gameOverPopup" class="popup" role="dialog" aria-popup="true" aria-labelledby="popupTitle">
+            <div class="popup-backdrop"></div>
+            <div class="popup-box">
+            <h2 id="popupTitle">Tempo finalizado</h2>
+            <p class="popup-message">Seu tempo acabou.</p>
+            <div class="popup-actions">
+                <button id="popupRestart" type="button">Reiniciar</button>
+                <button id="popupClose" type="button">Fechar</button>
+            </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- rodapé -->
