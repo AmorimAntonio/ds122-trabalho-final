@@ -33,9 +33,10 @@ function startTimer() {
         timeLeft--; // decrementa 1 segundo
         timerDisp.textContent = String(timeLeft).padStart(2, '0'); // atualiza display
         if (timeLeft <= 0) { // se o tempo acabar
-            clearInterval(timerInterval); // para o timer
-            feedback.textContent = '⏰ Tempo esgotado'; // feedback de tempo esgotado
-            playerInput.disabled = true; // desabilita o input
+            clearInterval(timerInterval);
+            // feedback.textContent = '⏰ Tempo esgotado';
+              flashFeedback('⏰ Tempo esgotado'); // 0 mantém o texto
+            playerInput.disabled = true;
         }
     }, 1000);
 }
@@ -50,6 +51,16 @@ function resetTimer(seconds = 60) {
     stopTimer();
     timeLeft = seconds;
     timerDisp.textContent = String(timeLeft).padStart(2, '0');
+}
+// ---------------------------------------- //
+
+// ---------------------------------------- //
+// função para dar feedback visual
+function flashFeedback(txt) {
+    feedback.textContent = '';               // torna vazio para quebrar o estado :not(:empty)
+    requestAnimationFrame(() => {            // na próxima frame recria o conteúdo
+        feedback.textContent = txt;
+    });
 }
 // ---------------------------------------- //
 
@@ -76,6 +87,7 @@ function renderLines(lines) {
     // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
 }
 
+
 // inicializa 4 linhas
 let lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
 let currentBlock = lines[0];
@@ -100,16 +112,14 @@ playerInput.addEventListener('keyup', function(event) {
         const targetSpan = spans[indexWord];
 
 
-        if (targetSpan) {
-            if (input === expecWord) {
-                targetSpan.style.color = "rgba(117, 150, 0, 1)";
-                feedback.textContent = "✅";
-                score+=10;
-                scoreValue.textContent = score;
-            } else {
-                targetSpan.style.color = "rgba(191, 38, 0, 1)";
-                feedback.textContent = "❌";
-            }
+        if (input === expecWord) {
+            targetSpan.style.color = "rgba(117, 150, 0, 1)";
+            flashFeedback('✅');;
+            score+=10;
+            scoreValue.textContent = score;
+        } else {
+            targetSpan.style.color = "rgba(191, 38, 0, 1)";
+            flashFeedback('❌');;
         }
 
         // avança para a próxima palavra
