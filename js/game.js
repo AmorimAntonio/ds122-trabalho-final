@@ -2,13 +2,13 @@ const words = [
   "javascript","html","css","programar","teclado","computador","web","codigo","função","variavel",
   "constante","objeto","array","condicional","loop","estrutura","classe","interface","elemento","browser",
   "framework","react","vue","angular","backend","frontend","servidor","cliente","dados","api",
-  "json","request","response","pacote","biblioteca","versao","terminal","comando","rede","pacote",
-  "navegador","extensao","protocolo","dns","porta","endereco","cache","cookie","session","login",
+  "json","request","response","pacote","biblioteca","versao","terminal","comando","rede", 
+  "navegador","extensao","protocolo","dns","porta","endereco","cache","cookie","session","login",   
   "usuario","senha","token","autenticacao","seguranca","criptografia","hash","banco","mysql","postgres",
   "sqlite","mongodb","armazenamento","tabela","coluna","linha","registro","campo","dom","evento","click",
   "input","output","mouse","tecla","espaço","digitar","tempo","pontos","erro","acerto","desafio",
   "pratica","rapido","velocidade","jogo","nivel","progresso","score","ranking","restart","pause",
-  "reiniciar","tela","design","interface","ux","ui","script","logica","algoritmo","funcoes","metodo"
+  "reiniciar","tela","design","interface","ux","ui","script","logica","algoritmo","funcoes","metodo" 
 ];
 
 const displayText = document.getElementById('displayText'); // área onde as palavras são mostradas
@@ -29,7 +29,8 @@ const btnRestart = document.getElementById('btnRestartFromPause');
 // função para iniciar o timer
 function startTimer() {
     clearInterval(timerInterval); // limpa qualquer timer existente
-    timerDisp.textContent = String(timeLeft).padStart(2, '0');  // inicializa display, padstart para sempre ter 2 digitos pelo menos
+    timerDisp.textContent = String(timeLeft).padStart(2, '0');  
+    // inicializa display, padstart para sempre ter 2 digitos pelo menos
     
     // inicia o timer
     timerInterval = setInterval(() => {
@@ -49,19 +50,7 @@ function stopTimer() {
     clearInterval(timerInterval);
 }
 
-// função para pausar o timer
-btnPause.addEventListener("click", function(){
-    if (btnClick){
-        startTimer();
-        btnClick = 0;
-        playerInput.disabled = false;
-    }
-    else{
-        stopTimer();
-        btnClick = 1;
-        playerInput.disabled = true;
-    }
-}) 
+
 
 // função de menu de pausa
 
@@ -105,8 +94,10 @@ function resetTimer(seconds = timeLeft) {
 
 // função para dar feedback visual
 function flashFeedback(txt) {
-    feedback.textContent = '';               // torna vazio para quebrar o estado :not(:empty)
-    requestAnimationFrame(() => {            // na próxima frame recria o conteúdo
+    feedback.textContent = '';               
+    // torna vazio para quebrar o estado :not(:empty) no CSS
+    requestAnimationFrame(() => {            
+        // recria o text para reiniciar a animação
         feedback.textContent = txt;
     });
 }
@@ -115,19 +106,85 @@ function flashFeedback(txt) {
 // função que gera 4 palavras aleatórias
 function genBlock(n) {
     if (wList.length < n) {
-        wList = [...words].sort(() => Math.random() - 0.5); // reembaralha se acabar as palavras
+        // reembaralha se acabar as palavras
+        wList = [...words].sort(() => Math.random() - 0.5); 
     }
-    //splice modifica o array original, removendo os primeiros n elementos e retorna os novos
+    //splice modifica o array original, removendo 
+    // os primeiros n elementos e retorna os novos
     return wList.splice(0, n);
 }
 
 // renderiza todas as linhas (cada linha é um bloco)
 function renderLines(lines) {
     displayText.innerHTML = 
-    lines.map(block => `<div class="line">${block.map(w => `<span>${w}</span>`).join(' ')}</div>`).join('');
+    lines.map(block => `<div class="line">${block.map(w => `<span>${w}</span>`)
+    .join(' ')}</div>`).join('');
     // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
 }
 
+// função que retorna a linha atual (primeira linha)
+function getCurrentLine() {
+    return displayText.querySelector('.line');
+}
+
+// função que retorna a lista de spans da linha atual
+function getCurrentLineSpans() {
+    const line = getCurrentLine();
+    return line.querySelectorAll('span');
+}
+
+// função que marca o span como correto ou incorreto
+function markTargetSpan(isCorrect) {
+    const spans = getCurrentLineSpans();
+    if (isCorrect) {
+        spans[indexWord].style.color = "rgba(117, 150, 0, 1)";
+    } else {
+        spans[indexWord].style.color = "rgba(191, 38, 0, 1)";
+    }
+}
+
+// função que lida com o tratamento de um bloco quando o jogador 
+// completa todas as palavras da linha
+function nextLine() {
+    lines.shift(); // remove a linha atual
+    lines.push(genBlock(10)); // adiciona uma nova linha
+    currentBlock = lines[0]; // aponta qual é a linha atual
+    indexWord = 0; // reseta o índice da palavra
+    renderLines(lines); // atualiza o dom
+}
+
+// processa o input quando o jogador aperta espaço
+function processSpaceInput() {
+    // input do usuario
+    const input = playerInput.value.trim();
+    // palavra que o usuario deve digitar
+    const expecWord = currentBlock[indexWord].trim();
+    let isCorrect;
+    // verifica se a palavra tá correta
+    if (input === expecWord)  isCorrect = true;
+    else isCorrect = false;
+    
+    // marca o span alvo como verde ou vermelho
+    markTargetSpan(isCorrect);
+
+    if (isCorrect) {
+        flashFeedback('✅');
+        score += 10;
+        scoreValue.textContent = score;
+    } else {
+        flashFeedback('❌');
+    }
+
+    // avança para a próxima palavra
+    indexWord++;
+    // limpa o input
+    playerInput.value = '';
+
+    // checa se o bloco foi completado
+    if (indexWord >= currentBlock.length) {
+        nextLine();
+    }
+}
 
 
 // ------------------ Variáveis --------------------- //
@@ -154,12 +211,14 @@ startTimer();
 
 // ------------------ Eventos --------------------- //
 
+
 // liga os botões do pause menu
 btnResume.addEventListener('click', function() {
     hidePauseMenu();
 });
 
-btnRestartFromPause.addEventListener('click', function() {
+
+btnRestart.addEventListener('click', function() {
     restartGame();
     hidePauseMenu();
 });
@@ -181,44 +240,10 @@ document.addEventListener('keydown', (e) => {
 
 // detecta quando o jogador aperta uma tecla (no caso, olhamos para o espaço)
 playerInput.addEventListener('keyup', function(event) {
-
-    //Se o player apertar espaço
     if (event.code === 'Space') {
-        // input do usuario
-        const input = playerInput.value.trim();
-        // palavra que o usuario deve digitar
-        const expecWord = currentBlock[indexWord].trim();
-        // pega os spans da primeira linha
-        const firstline = displayText.querySelector('.line');
-        const spans = firstline.querySelectorAll('span');
-        // span alvo
-        const targetSpan = spans[indexWord];
+        processSpaceInput();
+    }
 
-
-        if (input === expecWord) {
-            targetSpan.style.color = "rgba(117, 150, 0, 1)";
-            flashFeedback('✅');;
-            score+=10;
-            scoreValue.textContent = score;
-        } else {
-            targetSpan.style.color = "rgba(191, 38, 0, 1)";
-            flashFeedback('❌');;
-        }
-
-        // avança para a próxima palavra
-        indexWord++;
-        // limpa o input
-        playerInput.value = '';
-
-        
-        if (indexWord >= currentBlock.length) {
-            lines.shift(); // remove a linha atual
-            lines.push(genBlock(10)); // adiciona uma nova linha
-            currentBlock = lines[0]; // aponta qual é a linha atual
-            indexWord = 0;
-            renderLines(lines); // atualizando o dom
-        }
-  }
 });
 
 
