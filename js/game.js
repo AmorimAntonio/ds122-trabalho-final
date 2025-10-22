@@ -17,7 +17,10 @@ const feedback = document.getElementById('feedback'); // feedback de acerto/erro
 const scoreValue = document.getElementById('scoreValue'); // pontuação
 const timerDisp = document.getElementById('timer'); // display do timer
 const btnPause = document.getElementById('btnPause'); // botão de pausar
-const btnRestart = document.getElementById('btnRestart'); // botão de reiniciar
+const pauseMenu = document.getElementById('pauseMenu');
+const btnResume = document.getElementById('btnResume');
+const btnRestart = document.getElementById('btnRestartFromPause');
+
 
 // ------------------ Funções --------------------- //
 
@@ -60,11 +63,27 @@ btnPause.addEventListener("click", function(){
     }
 }) 
 
-btnRestart.addEventListener("click", function(){
-    // reinicia o jogo
-    resetTimer(60); // reseta o timer para 60 segundos
+// função de menu de pausa
+
+// mostra o menu de pausa
+function showPauseMenu() {
+    pauseMenu.hidden = false;
+    stopTimer();
+    playerInput.disabled = true;
+}
+
+// sai  do menu de pausa
+function hidePauseMenu() {
+    pauseMenu.hidden = true;
+    startTimer();
+    playerInput.disabled = false;
+}
+
+// reinicia o jogo
+function restartGame() {
+    stopTimer();
+    resetTimer(60); // tempo inicial
     score = 0;
-    btnClick = 0;
     scoreValue.textContent = score;
     indexWord = 0;
     playerInput.value = '';
@@ -73,14 +92,9 @@ btnRestart.addEventListener("click", function(){
     lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
     currentBlock = lines[0];
     renderLines(lines);
-
-    // reinicia timer
     startTimer();
-
-    // limpa feedback visual
     feedback.textContent = '';
 }
-)
 
 // função para resetar o timer
 function resetTimer(seconds = timeLeft) {
@@ -114,8 +128,9 @@ function renderLines(lines) {
     // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
 }
 
-// ---------------------------------------- // 
 
+
+// ------------------ Variáveis --------------------- //
 
 // embaralhar palavras
 let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
@@ -134,6 +149,35 @@ renderLines(lines);
 
 // inicia o timer ao começar o jogo
 startTimer();
+
+
+
+// ------------------ Eventos --------------------- //
+
+// liga os botões do pause menu
+btnResume.addEventListener('click', function() {
+    hidePauseMenu();
+});
+
+btnRestartFromPause.addEventListener('click', function() {
+    restartGame();
+    hidePauseMenu();
+});
+
+// exibindo menu de pausa ao clicar no botão
+btnPause.addEventListener('click', showPauseMenu);
+
+
+// permitir Esc para alternar menu de pausa
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (pauseMenu && !pauseMenu.hidden) {
+            hidePauseMenu();
+        } else {
+            showPauseMenu();
+        }
+    }
+});
 
 // detecta quando o jogador aperta uma tecla (no caso, olhamos para o espaço)
 playerInput.addEventListener('keyup', function(event) {
