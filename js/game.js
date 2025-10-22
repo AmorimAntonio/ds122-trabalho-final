@@ -15,8 +15,46 @@ const displayText = document.getElementById('displayText'); // área onde as pal
 const playerInput = document.getElementById('playerInput'); // input do jogador
 const feedback = document.getElementById('feedback'); // feedback de acerto/erro
 const scoreValue = document.getElementById('scoreValue'); // pontuação
-const timer = document.getElementById('timer'); // timer 
+const timerDisp = document.getElementById('timer'); // display do timer
 
+
+// ---------------------------------------- //
+// Timer:
+let timeLeft = 60; // tempo inicial em segundos do timer
+let timerInterval = null; //setinterval
+
+// função para iniciar o timer
+function startTimer() {
+    clearInterval(timerInterval); // limpa qualquer timer existente
+    timerDisp.textContent = String(timeLeft).padStart(2, '0');  // inicializa display, padstart para sempre ter 2 digitos pelo menos
+    
+    // inicia o timer
+    timerInterval = setInterval(() => {
+        timeLeft--; // decrementa 1 segundo
+        timerDisp.textContent = String(timeLeft).padStart(2, '0'); // atualiza display
+        if (timeLeft <= 0) { // se o tempo acabar
+            clearInterval(timerInterval); // para o timer
+            feedback.textContent = '⏰ Tempo esgotado'; // feedback de tempo esgotado
+            playerInput.disabled = true; // desabilita o input
+        }
+    }, 1000);
+}
+
+// função para parar o timer
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+// função para resetar o timer
+function resetTimer(seconds = 60) {
+    stopTimer();
+    timeLeft = seconds;
+    timerDisp.textContent = String(timeLeft).padStart(2, '0');
+}
+// ---------------------------------------- //
+
+
+// ---------------------------------------- // 
 // embaralhar palavras
 let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
 let indexWord = 0;  // controla qual palavra o jogador deve digitar
@@ -42,6 +80,9 @@ function renderLines(lines) {
 let lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
 let currentBlock = lines[0];
 renderLines(lines);
+
+// inicia o timer ao começar o jogo
+startTimer();
 
 // detecta quando o jogador aperta uma tecla (no caso, olhamos para o espaço)
 playerInput.addEventListener('keyup', function(event) {
@@ -86,3 +127,5 @@ playerInput.addEventListener('keyup', function(event) {
         }
   }
 });
+
+
