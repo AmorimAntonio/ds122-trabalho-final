@@ -16,12 +16,11 @@ const playerInput = document.getElementById('playerInput'); // input do jogador
 const feedback = document.getElementById('feedback'); // feedback de acerto/erro
 const scoreValue = document.getElementById('scoreValue'); // pontuação
 const timerDisp = document.getElementById('timer'); // display do timer
+const btnPause = document.getElementById('btnPause'); // botão de pausar
+
+// ------------------ Funções --------------------- //
 
 
-// ---------------------------------------- //
-// Timer:
-let timeLeft = 60; // tempo inicial em segundos do timer
-let timerInterval = null; //setinterval
 
 // função para iniciar o timer
 function startTimer() {
@@ -46,15 +45,25 @@ function stopTimer() {
     clearInterval(timerInterval);
 }
 
+// função para pausar o timer
+btnPause.addEventListener("click", function(){
+    if (btnClick){
+        startTimer();
+        btnClick = 0;
+    }
+    else{
+        stopTimer();
+        btnClick = 1;
+    }
+}) 
+
 // função para resetar o timer
-function resetTimer(seconds = 60) {
+function resetTimer(seconds = timeLeft) {
     stopTimer();
     timeLeft = seconds;
     timerDisp.textContent = String(timeLeft).padStart(2, '0');
 }
-// ---------------------------------------- //
 
-// ---------------------------------------- //
 // função para dar feedback visual
 function flashFeedback(txt) {
     feedback.textContent = '';               // torna vazio para quebrar o estado :not(:empty)
@@ -62,14 +71,7 @@ function flashFeedback(txt) {
         feedback.textContent = txt;
     });
 }
-// ---------------------------------------- //
 
-
-// ---------------------------------------- // 
-// embaralhar palavras
-let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
-let indexWord = 0;  // controla qual palavra o jogador deve digitar
-let score = 0;
 
 // função que gera 4 palavras aleatórias
 function genBlock(n) {
@@ -87,6 +89,18 @@ function renderLines(lines) {
     // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
 }
 
+// ---------------------------------------- // 
+
+
+// embaralhar palavras
+let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
+let indexWord = 0;  // controla qual palavra o jogador deve digitar
+let score = 0;
+
+// variáveis do timer
+let timeLeft = 60; // tempo inicial em segundos do timer
+let timerInterval = null; //setinterval
+let btnClick = 0; // boolean para pausar/despausar
 
 // inicializa 4 linhas
 let lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
