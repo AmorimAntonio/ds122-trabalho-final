@@ -9,7 +9,8 @@ const btnPause = document.getElementById('btnPause'); // botão de pausar
 const pauseMenu = document.getElementById('pauseMenu');
 const btnResume = document.getElementById('btnResume');
 const btnRestart = document.getElementById('btnRestartFromPause');
-
+const btnLangPt = document.getElementById('btnLangPt');
+const btnLangEn = document.getElementById('btnLangEn');
 
 // ------------------ Funções --------------------- //
 
@@ -38,10 +39,6 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timerInterval);
 }
-
-
-
-// função de menu de pausa
 
 // mostra o menu de pausa
 function showPauseMenu() {
@@ -80,6 +77,24 @@ function resetTimer(seconds = timeLeft) {
     timeLeft = seconds;
     timerDisp.textContent = String(timeLeft).padStart(2, '0');
 }
+
+// função para alternar o idioma
+function setLanguage(lang) {
+    if (lang === 'en') {
+        words = wordsEn; 
+    } else {
+        words = wordsPT;
+    }
+
+    // reinicia linhas/estado com as palavras do respectivo idioma
+    wList = [...words].sort(() => Math.random() - 0.5);
+    indexWord = 0;
+    lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
+    currentBlock = lines[0];
+    renderLines(lines);
+    playerInput.value = '';
+}
+
 
 // função para dar feedback visual
 function flashFeedback(txt) {
@@ -179,7 +194,7 @@ function processSpaceInput() {
 // ------------------ Variáveis --------------------- //
 
 // embaralhar palavras
-let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
+let wList = [...wordsPT].sort(() => Math.random() - 0.5); //[...wordsPT] cria cópia
 let indexWord = 0;  // controla qual palavra o jogador deve digitar
 let score = 0;
 
@@ -235,4 +250,7 @@ playerInput.addEventListener('keyup', function(event) {
 
 });
 
+// alterna os idiomas
+btnLangPt.addEventListener('click', function () { setLanguage('pt'); });
+btnLangEn.addEventListener('click', function () { setLanguage('en'); });
 

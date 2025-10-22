@@ -1,12 +1,27 @@
-window.words = [
-  "javascript","html","css","programar","teclado","computador","web","codigo","função","variavel",
-  "constante","objeto","array","condicional","loop","estrutura","classe","interface","elemento","browser",
-  "framework","react","vue","angular","backend","frontend","servidor","cliente","dados","api",
-  "json","request","response","pacote","biblioteca","versao","terminal","comando","rede", 
-  "navegador","extensao","protocolo","dns","porta","endereco","cache","cookie","session","login",   
-  "usuario","senha","token","autenticacao","seguranca","criptografia","hash","banco","mysql","postgres",
-  "sqlite","mongodb","armazenamento","tabela","coluna","linha","registro","campo","dom","evento","click",
-  "input","output","mouse","tecla","espaço","digitar","tempo","pontos","erro","acerto","desafio",
-  "pratica","rapido","velocidade","jogo","nivel","progresso","score","ranking","restart","pause",
-  "reiniciar","tela","design","interface","ux","ui","script","logica","algoritmo","funcoes","metodo" 
+window.wordsPT = [
+  "computador","programacao","codigo","software","hardware","internet","rede","servidor","cliente",
+  "banco","dados","sistema","aplicativo","navegador","teclado","monitor","mouse","memoria","processador",
+  "placa","driver","algoritmo","variavel","funcao","objeto","classe","metodo","estrutura","condicional",
+  "repeticao","biblioteca","pacote","terminal","comando","depuracao","erro","execucao","compilador",
+  "interprete","linguagem","projeto","logica","tabela","registro","campo","coluna","linha","banco",
+  "consulta","insercao","atualizacao","exclusao","arquivo","pasta","diretorio","caminho","enderecamento",
+  "protocolo","porta","dominio","endereco","usuario","senha","acesso","autenticacao","seguranca",
+  "criptografia","armazenamento","backup","restauracao","nuvem","processo","memoria","rede","roteador",
+  "modem","sinal","conexao","nodo","pacote","mensagem","transmissao","latencia","resposta","requisição",
+  "servidor","infraestrutura","dispositivo","sensor","maquina","terminal","tela","cursor","byte","bit",
+  "matriz","vetor","pilha","fila","estrutura","processo","execucao","sinalizacao","sistema","modulo"
+];
+
+window.wordsEn = [
+  "computer","programming","code","software","hardware","internet","network","server","client",
+  "database","data","system","application","browser","keyboard","monitor","mouse","memory","processor",
+  "board","driver","algorithm","variable","function","object","class","method","structure","conditional",
+  "loop","library","package","terminal","command","debug","error","execution","compiler","interpreter",
+  "language","project","logic","table","record","field","column","row","database","query","insert",
+  "update","delete","file","folder","directory","path","addressing","protocol","port","domain","address",
+  "user","password","access","authentication","security","encryption","storage","backup","restore",
+  "cloud","process","memory","network","router","modem","signal","connection","node","packet","message",
+  "transmission","latency","response","request","server","infrastructure","device","sensor","machine",
+  "terminal","screen","cursor","byte","bit","matrix","vector","stack","queue","structure","process",
+  "execution","signaling","system","module"
 ];
