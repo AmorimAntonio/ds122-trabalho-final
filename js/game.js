@@ -215,7 +215,7 @@ let indexWord = 0;  // controla qual palavra o jogador deve digitar
 let score = 0;
 
 // variáveis do timer
-let timeLeft = 60; // tempo inicial em segundos do timer
+let timeLeft = 6; // tempo inicial em segundos do timer
 let timerInterval = null; //setinterval
 
 // inicializa 4 linhas
@@ -257,9 +257,33 @@ document.addEventListener('keydown', (e) => {
 });
 
 // alterna os idiomas
-btnLangPt.addEventListener('click', function () { setLanguage('pt'); });
-btnLangEn.addEventListener('click', function () { setLanguage('en'); });
-btnLangFr.addEventListener('click', function () { setLanguage('fr'); });
+btnLangPt.addEventListener('click', function () {
+    words = wordsPT;
+    wList = [...words].sort(() => Math.random() - 0.5);
+    indexWord = 0;
+    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+    currentLine = lines[0];
+    renderLines(lines);
+    playerInput.value = '';
+});
+btnLangEn.addEventListener('click', function () {
+    words = wordsEn;
+    wList = [...words].sort(() => Math.random() - 0.5);
+    indexWord = 0;
+    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+    currentLine = lines[0];
+    renderLines(lines);
+    playerInput.value = '';
+});
+btnLangFr.addEventListener('click', function () {
+    words = wordsFR;
+    wList = [...words].sort(() => Math.random() - 0.5);
+    indexWord = 0;
+    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+    currentLine = lines[0];
+    renderLines(lines);
+    playerInput.value = '';
+});
 
 
 
