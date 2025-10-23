@@ -6,12 +6,12 @@ const feedback = document.getElementById('feedback'); // feedback de acerto/erro
 const scoreValue = document.getElementById('scoreValue'); // pontuação
 const timerDisp = document.getElementById('timer'); // display do timer
 const btnPause = document.getElementById('btnPause'); // botão de pausar
-const pauseMenu = document.getElementById('pauseMenu');
-const btnResume = document.getElementById('btnResume');
-const btnRestart = document.getElementById('btnRestartFromPause');
-const btnLangPt = document.getElementById('btnLangPt');
-const btnLangEn = document.getElementById('btnLangEn');
-const btnLangFr = document.getElementById('btnLangFr');
+const pauseMenu = document.getElementById('pauseMenu'); // menu de pausa
+const btnResume = document.getElementById('btnResume'); // botão de voltar
+const btnRestart = document.getElementById('btnRestartFromPause'); // botão de reiniciar
+const btnLangPt = document.getElementById('btnLangPt'); // botão de idioma português
+const btnLangEn = document.getElementById('btnLangEn'); // botão de idioma inglês
+const btnLangFr = document.getElementById('btnLangFr'); // botão de idioma francês
 
 // ------------------ Funções --------------------- //
 
@@ -239,7 +239,7 @@ btnPause.addEventListener('click', showPauseMenu);
 // permitir Esc para alternar menu de pausa
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        if (pauseMenu && !pauseMenu.hidden) {
+        if (!pauseMenu.hidden) {
             hidePauseMenu();
         } else {
             showPauseMenu();
@@ -247,16 +247,19 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// detecta quando o jogador aperta uma tecla (no caso, olhamos para o espaço)
-playerInput.addEventListener('keyup', function(event) {
-    if (event.code === 'Space') {
-        processSpaceInput();
-    }
-
-});
-
 // alterna os idiomas
 btnLangPt.addEventListener('click', function () { setLanguage('pt'); });
 btnLangEn.addEventListener('click', function () { setLanguage('en'); });
 btnLangFr.addEventListener('click', function () { setLanguage('fr'); });
+
+
+
+// detecta quando o jogador aperta o espaço (ou enter) 
+playerInput.addEventListener('keyup', function(event) {
+    if (event.code === 'Space' || event.code === 'Enter') {
+        event.preventDefault();
+        processSpaceInput();
+    }
+
+});
 
