@@ -12,8 +12,9 @@ const btnRestart = document.getElementById('btnRestartFromPause'); // botão de 
 const btnLangPt = document.getElementById('btnLangPt'); // botão de idioma português
 const btnLangEn = document.getElementById('btnLangEn'); // botão de idioma inglês
 const btnLangFr = document.getElementById('btnLangFr'); // botão de idioma francês
-
-
+const endGameMenu = document.getElementById('endgameMenu'); // menu de fim de jogo
+const finalScoreDisp = document.getElementById('finalScoreDisp'); // display de pontuação final
+const btnRestartFromEndgame = document.getElementById('btnRestartFromEndgame'); // botão de reiniciar do menu de fim de jogo
 
 // ------------------ Funções --------------------- //
 
@@ -30,7 +31,8 @@ function startTimer() {
         if (timeLeft <= 0) { // se o tempo acabar
             clearInterval(timerInterval);
             // feedback.textContent = '⏰ Tempo esgotado';
-              flashFeedback('⏰ Tempo esgotado'); // 0 mantém o texto
+            flashFeedback('⏰ Tempo esgotado'); // 0 mantém o texto
+            endGame(); // chama a função de fim de jogo
             playerInput.disabled = true;
         }
     }, 1000);
@@ -100,6 +102,13 @@ function setLanguage(lang) {
     currentLine = lines[0];
     renderLines(lines);
     playerInput.value = '';
+}
+
+// Funções de fim de jogo
+function endGame() {
+    endGameMenu.hidden = false;
+    stopTimer();
+    playerInput.disabled = true;
 }
 
 
@@ -263,3 +272,8 @@ playerInput.addEventListener('keyup', function(event) {
 
 });
 
+btnRestartFromEndgame.addEventListener('click', function() {
+    restartGame();
+    endGameMenu.hidden = true;
+    console.log('Jogo reiniciado do menu de fim de jogo');
+});

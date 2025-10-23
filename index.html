@@ -57,6 +57,26 @@
     </div>
 
 
+    <!-- Endgame menu -->
+    <div id="endgameMenu" class="endgame-menu" role="dialog" aria-modal="true" aria-labelledby="endgameTitle" hidden>
+    <div class="endgame-backdrop" aria-hidden="true"></div>
+
+    <div class="endgame-box" role="document">
+        <h2 id="endgameTitleHead">It's over</h2>
+        <p class="endgame-subtitle">Você perdeu.</p>
+
+        <div class="endgame-actions">
+        <p class="final-score-text">Sua pontuação final:</p>
+        <p id="finalScoreDisp" class="final-score-value">0</p>
+        <button id="btnRestartFromEndgame" type="button">Jogar novamente</button>
+        </div>
+
+        <div class="endgame-extra">
+        <small class="endgame-note">Obrigado por jogar!</small>
+        </div>
+    </div>
+    </div>
+
     <!-- main -->
     <main id="gameArea" class="game-area">
 
