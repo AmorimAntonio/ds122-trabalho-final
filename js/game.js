@@ -85,6 +85,8 @@ function restartGame() {
 
 // função para alternar o idioma
 function setLanguage(lang) {
+    currentLang = lang;
+    
     if (lang === 'en') {
         words = wordsEn; 
     }
@@ -210,7 +212,9 @@ function processSpaceInput() {
 // ------------------ Variáveis --------------------- //
 
 // embaralhar palavras
-let wList = [...wordsPT].sort(() => Math.random() - 0.5); //[...wordsPT] cria cópia
+let currentWord = 'pt';
+let words = window.wordsPT; // idioma padrão
+let wList = [...words].sort(() => Math.random() - 0.5); //[...words] cria cópia
 let indexWord = 0;  // controla qual palavra o jogador deve digitar
 let score = 0;
 
@@ -258,31 +262,13 @@ document.addEventListener('keydown', (e) => {
 
 // alterna os idiomas
 btnLangPt.addEventListener('click', function () {
-    words = wordsPT;
-    wList = [...words].sort(() => Math.random() - 0.5);
-    indexWord = 0;
-    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
-    currentLine = lines[0];
-    renderLines(lines);
-    playerInput.value = '';
+    setLanguage('pt');
 });
 btnLangEn.addEventListener('click', function () {
-    words = wordsEn;
-    wList = [...words].sort(() => Math.random() - 0.5);
-    indexWord = 0;
-    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
-    currentLine = lines[0];
-    renderLines(lines);
-    playerInput.value = '';
+    setLanguage('en');
 });
 btnLangFr.addEventListener('click', function () {
-    words = wordsFR;
-    wList = [...words].sort(() => Math.random() - 0.5);
-    indexWord = 0;
-    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
-    currentLine = lines[0];
-    renderLines(lines);
-    playerInput.value = '';
+    setLanguage('fr');
 });
 
 
