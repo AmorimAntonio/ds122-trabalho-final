@@ -13,15 +13,15 @@ const btnLangPt = document.getElementById('btnLangPt'); // botão de idioma port
 const btnLangEn = document.getElementById('btnLangEn'); // botão de idioma inglês
 const btnLangFr = document.getElementById('btnLangFr'); // botão de idioma francês
 
+
+
 // ------------------ Funções --------------------- //
-
-
 
 // função para iniciar o timer
 function startTimer() {
     clearInterval(timerInterval); // limpa qualquer timer existente
-    timerDisp.textContent = String(timeLeft).padStart(2, '0');  
-    // inicializa display, padstart para sempre ter 2 digitos pelo menos
+    timerDisp.textContent = String(timeLeft).padStart(2, '0');   
+    // inicializa display, padstart para sempre ter 2 digitos pelo menos 
     
     // inicia o timer
     timerInterval = setInterval(() => {
@@ -34,6 +34,14 @@ function startTimer() {
             playerInput.disabled = true;
         }
     }, 1000);
+}
+
+
+// função para resetar o timer
+function resetTimer(seconds = timeLeft) {
+    stopTimer();
+    timeLeft = seconds;
+    timerDisp.textContent = String(timeLeft).padStart(2, '0');
 }
 
 // função para parar o timer
@@ -65,19 +73,13 @@ function restartGame() {
     playerInput.value = '';
     playerInput.disabled = false;
     wList = [...words].sort(() => Math.random() - 0.5);
-    lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
-    currentBlock = lines[0];
+    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+    currentLine = lines[0];
     renderLines(lines);
     startTimer();
     feedback.textContent = '';
 }
 
-// função para resetar o timer
-function resetTimer(seconds = timeLeft) {
-    stopTimer();
-    timeLeft = seconds;
-    timerDisp.textContent = String(timeLeft).padStart(2, '0');
-}
 
 // função para alternar o idioma
 function setLanguage(lang) {
@@ -94,8 +96,8 @@ function setLanguage(lang) {
     // reinicia linhas/estado com as palavras do respectivo idioma
     wList = [...words].sort(() => Math.random() - 0.5);
     indexWord = 0;
-    lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
-    currentBlock = lines[0];
+    lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+    currentLine = lines[0];
     renderLines(lines);
     playerInput.value = '';
 }
@@ -112,8 +114,8 @@ function flashFeedback(txt) {
 }
 
 
-// função que gera 4 palavras aleatórias
-function genBlock(n) {
+// função que gera palavras aleatórias
+function genLine(n) {
     if (wList.length < n) {
         // reembaralha se acabar as palavras
         wList = [...words].sort(() => Math.random() - 0.5); 
@@ -131,7 +133,7 @@ function renderLines(lines) {
     // faz cada linha ser uma div, e cada palavra um span, unidas por espaços
 }
 
-// função que retorna a linha atual (primeira linha)
+// função que retorna a linha
 function getCurrentLine() {
     return displayText.querySelector('.line');
 }
@@ -156,8 +158,8 @@ function markTargetSpan(isCorrect) {
 // completa todas as palavras da linha
 function nextLine() {
     lines.shift(); // remove a linha atual
-    lines.push(genBlock(10)); // adiciona uma nova linha
-    currentBlock = lines[0]; // aponta qual é a linha atual
+    lines.push(genLine(10)); // adiciona uma nova linha
+    currentLine = lines[0]; // aponta qual é a linha atual
     indexWord = 0; // reseta o índice da palavra
     renderLines(lines); // atualiza o dom
 }
@@ -167,7 +169,7 @@ function processSpaceInput() {
     // input do usuario
     const input = playerInput.value.trim();
     // palavra que o usuario deve digitar
-    const expecWord = currentBlock[indexWord].trim();
+    const expecWord = currentLine[indexWord].trim();
     let isCorrect;
     // verifica se a palavra tá correta
     if (input === expecWord)  isCorrect = true;
@@ -190,7 +192,7 @@ function processSpaceInput() {
     playerInput.value = '';
 
     // checa se o bloco foi completado
-    if (indexWord >= currentBlock.length) {
+    if (indexWord >= currentLine.length) {
         nextLine();
     }
 }
@@ -206,11 +208,10 @@ let score = 0;
 // variáveis do timer
 let timeLeft = 60; // tempo inicial em segundos do timer
 let timerInterval = null; //setinterval
-let btnClick = 0; // boolean para pausar/despausar
 
 // inicializa 4 linhas
-let lines = [genBlock(10), genBlock(10), genBlock(10), genBlock(10)];
-let currentBlock = lines[0];
+let lines = [genLine(10), genLine(10), genLine(10), genLine(10)];
+let currentLine = lines[0];
 renderLines(lines);
 
 // inicia o timer ao começar o jogo
@@ -219,7 +220,6 @@ startTimer();
 
 
 // ------------------ Eventos --------------------- //
-
 
 // liga os botões do pause menu
 btnResume.addEventListener('click', function() {

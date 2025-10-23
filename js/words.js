@@ -9,7 +9,7 @@ window.wordsPT = [
   "criptografia","armazenamento","backup","restauracao","nuvem","processo","memoria","rede","roteador",
   "modem","sinal","conexao","nodo","pacote","mensagem","transmissao","latencia","resposta","requisição",
   "servidor","infraestrutura","dispositivo","sensor","maquina","terminal","tela","cursor","byte","bit",
-  "matriz","vetor","pilha","fila","estrutura","processo","execucao","sinalizacao","sistema","modulo"
+  "matriz","vetor","pilha","fila","estrutura","processo","execucao","sinalizacao","sistema","modulo", "labubu"
 ];
 
 window.wordsEn = [
@@ -23,7 +23,7 @@ window.wordsEn = [
   "cloud","process","memory","network","router","modem","signal","connection","node","packet","message",
   "transmission","latency","response","request","server","infrastructure","device","sensor","machine",
   "terminal","screen","cursor","byte","bit","matrix","vector","stack","queue","structure","process",
-  "execution","signaling","system","module"
+  "execution","signaling","system","module", "bobbiegoods"
 ];
 
 window.wordsFR = [
