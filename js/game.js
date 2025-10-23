@@ -86,7 +86,7 @@ function restartGame() {
 // função para alternar o idioma
 function setLanguage(lang) {
     currentLang = lang;
-    
+
     if (lang === 'en') {
         words = wordsEn; 
     }
@@ -111,6 +111,7 @@ function endGame() {
     endGameMenu.hidden = false;
     stopTimer();
     playerInput.disabled = true;
+    finalScoreDisp.textContent = score;
 }
 
 
@@ -282,6 +283,8 @@ playerInput.addEventListener('keyup', function(event) {
 
 });
 
+
+// botão de reiniciar do menu de fim de jogo
 btnRestartFromEndgame.addEventListener('click', function() {
     restartGame();
     endGameMenu.hidden = true;
