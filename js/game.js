@@ -11,6 +11,7 @@ const btnResume = document.getElementById('btnResume');
 const btnRestart = document.getElementById('btnRestartFromPause');
 const btnLangPt = document.getElementById('btnLangPt');
 const btnLangEn = document.getElementById('btnLangEn');
+const btnLangFr = document.getElementById('btnLangFr');
 
 // ------------------ Funções --------------------- //
 
@@ -82,6 +83,10 @@ function resetTimer(seconds = timeLeft) {
 function setLanguage(lang) {
     if (lang === 'en') {
         words = wordsEn; 
+    }
+    else if (lang === 'fr') {
+        words = wordsFR;
+    
     } else {
         words = wordsPT;
     }
@@ -253,4 +258,5 @@ playerInput.addEventListener('keyup', function(event) {
 // alterna os idiomas
 btnLangPt.addEventListener('click', function () { setLanguage('pt'); });
 btnLangEn.addEventListener('click', function () { setLanguage('en'); });
+btnLangFr.addEventListener('click', function () { setLanguage('fr'); });
 

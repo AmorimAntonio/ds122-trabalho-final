@@ -25,3 +25,19 @@ window.wordsEn = [
   "terminal","screen","cursor","byte","bit","matrix","vector","stack","queue","structure","process",
   "execution","signaling","system","module"
 ];
+
+window.wordsFR = [
+  "ordinateur","programmation","code","logiciel","materiel","internet","reseau","serveur","client",
+  "base","donnees","systeme","application","navigateur","clavier","ecran","souris","memoire","processeur",
+  "carte","pilote","algorithme","variable","fonction","objet","classe","methode","structure","condition",
+  "boucle","bibliotheque","paquet","terminal","commande","debuggage","erreur","execution","compilateur",
+  "interpreteur","langage","projet","logique","table","enregistrement","champ","colonne","ligne",
+  "requete","insertion","miseajour","suppression","fichier","dossier","repertoire","chemin","adresse",
+  "protocole","port","domaine","utilisateur","motdepasse","acces","authentification","securite",
+  "chiffrement","stockage","sauvegarde","restauration","nuage","processus","memoire","reseau",
+  "routeur","modem","signal","connexion","noeud","paquet","message","transmission","latence",
+  "reponse","requete","serveur","infrastructure","appareil","capteur","machine","terminal","ecran",
+  "curseur","octet","bit","matrice","vecteur","pile","file","structure","processus","execution",
+  "signalisation","systeme","module","developpement","donnee","analyse","modele","interface","plateforme",
+  "utilisation","naviguer","configurer","installer","redemarrer","optimiser","tester","miseajour"
+];
